@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Uncomment to choose whichever app you prefer
+#$SNAP_APP_PATH/usr/bin/qmlscene $SNAP_APP_PATH/demo.qml
+$SNAP_APP_PATH/samegame
+
+wait
