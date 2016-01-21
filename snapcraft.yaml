@@ -25,6 +25,10 @@ parts:
     plugin: copy
     files:
       samegame: samegame
+  clocks:
+    plugin: copy
+    files:
+      clocks: clocks
   glue:
     plugin: copy
     files:
