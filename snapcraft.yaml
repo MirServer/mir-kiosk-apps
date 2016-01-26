@@ -1,17 +1,18 @@
 name: mir-client
 version: 1.0
-vendor: Mir team <mir-devel@lists.ubuntu.com>
+#vendor: Mir team <mir-devel@lists.ubuntu.com>
 summary: Example app on Mir stack
 description: "This example can be used as a guide by other mir client snaps to render guis"
-icon: ./mir.png
+icon: mir.png
 # as this is an example, type could be changed to oem
 type: app
 
-services:
+apps:
   client-start:
-    caps:
+    command: bin/client-start
+    daemon: simple
+#    caps:
 #      - mir-client
-    start: bin/client-start
     security-template: unconfined
 parts:
   mir-client:
@@ -21,10 +22,10 @@ parts:
     files:
       demo.qml: demo.qml
 #    all stage-packages taken care of by plugin
-  samegame:
-    plugin: copy
-    files:
-      samegame: samegame
+#  samegame:
+#    plugin: copy
+#    files:
+#      samegame: samegame
   clocks:
     plugin: copy
     files:
