@@ -1,6 +1,5 @@
 name: mir-client
-version: 1.0
-#vendor: Mir team <mir-devel@lists.ubuntu.com>
+version: 19.0
 summary: Example app on Mir stack
 description: "This example can be used as a guide by other mir client snaps to render guis"
 icon: mir.png
@@ -11,8 +10,12 @@ apps:
   client-start:
     command: bin/client-start
     daemon: simple
-#    caps:
-#      - mir-client
+    uses:
+      - migration-stuff
+#    security-template: unconfined
+uses:
+  migration-stuff:
+    type: migration-skill
     security-template: unconfined
 parts:
   mir-client:
