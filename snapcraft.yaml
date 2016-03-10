@@ -10,12 +10,13 @@ apps:
   client-start:
     command: bin/client-start
     daemon: simple
-    uses:
-      - migration-stuff
-#    security-template: unconfined
-uses:
-  migration-stuff:
-    type: migration-skill
+    plugs:
+      - mir-client-caps
+plugs:
+  mir-client-caps:
+    type: old-security
+#    caps:
+#      - mir-client
     security-template: unconfined
 parts:
   mir-client:
