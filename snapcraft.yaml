@@ -1,5 +1,5 @@
 name: mir-client
-version: 0.20.2
+version: 0.20.3
 summary: Example app on Mir stack
 description: "This example can be used as a guide by other mir client snaps to render guis"
 icon: mir.png
