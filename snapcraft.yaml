@@ -11,29 +11,58 @@ apps:
     command: bin/client-start
     daemon: simple
     plugs:
-      - mir-client-caps
-plugs:
-  mir-client-caps:
-    type: old-security
-#    caps:
-#      - mir-client
-    security-template: unconfined
+      - mir
 parts:
-  mir-client:
-    plugin: mir-client
-  qmldemo:
-    plugin: copy
-    files:
-      demo.qml: demo.qml
-#    all stage-packages taken care of by plugin
-#  samegame:
-#    plugin: copy
-#    files:
-#      samegame: samegame
   clocks:
     plugin: copy
     files:
       clocks: clocks
+    stage-packages:
+      - qmlscene
+      - qtdeclarative5-qtmir-plugin
+      - mir-graphics-drivers-desktop
+      - qtubuntu-desktop
+      - ttf-ubuntu-font-family
+      - qml-module-qt-labs-folderlistmodel
+      - qml-module-qt-labs-settings
+      - qml-module-qt-websockets
+      - qml-module-qtfeedback
+      - qml-module-qtgraphicaleffects
+      - qml-module-qtlocation
+      - qml-module-qtmultimedia
+      - qml-module-qtorganizer
+      - qml-module-qtpositioning
+      - qml-module-qtqml-models2
+      - qml-module-qtqml-statemachine
+      - qml-module-qtquick-controls
+      - qml-module-qtquick-dialogs
+      - qml-module-qtquick-layouts
+      - qml-module-qtquick-localstorage
+      - qml-module-qtquick-particles2
+      - qml-module-qtquick-privatewidgets
+      - qml-module-qtquick-window2
+      - qml-module-qtquick-xmllistmodel
+      - qml-module-qtquick2
+      - qml-module-qtsensors
+      - qml-module-qtsysteminfo
+      - qml-module-qttest
+      - qml-module-qtwebkit
+      - intltool
+      - qtdeclarative5-dev
+# alternate clients to play with
+#  qmldemo:
+#    plugin: copy
+#    files:
+#      demo.qml: demo.qml
+#  samegame:
+#    plugin: copy
+#    files:
+#      samegame: samegame
+  environment:
+    plugin: copy
+    files:
+#      qtclockenv: bin/qtclockenv
+      snappy-qt5.conf: etc/xdg/qtchooser/snappy-qt5.conf
   glue:
     plugin: copy
     files:
