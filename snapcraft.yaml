@@ -1,9 +1,9 @@
 name: mir-client
-version: 0.23.2
+version: 0.23.3
 summary: Example app on Mir stack
 description: "This example can be used as a guide by other mir client snaps to render guis"
-icon: mir.png
 # as this is an example, type could be changed to oem
+confinement: strict
 type: app
 
 apps:
