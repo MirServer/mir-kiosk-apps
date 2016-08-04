@@ -1,7 +1,5 @@
 #!/bin/bash
 
-wait 30
-
 export ARCH='x86_64-linux-gnu'
 export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH:$LD_LIBRARY_PATH
 # Mir config
