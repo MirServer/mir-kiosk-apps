@@ -12,6 +12,7 @@ apps:
     daemon: simple
     plugs:
       - mir
+      - opengl
 parts:
   clocks:
     plugin: copy
