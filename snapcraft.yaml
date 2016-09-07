@@ -14,14 +14,14 @@ apps:
       - mir
       - opengl
 parts:
-  clocks:
-    plugin: copy
-    files:
-      clocks: clocks
+  examples:
+    plugin: nil
     stage-packages:
+      - qtdeclarative5-examples
       - qmlscene
       - qtdeclarative5-qtmir-plugin
       - mir-graphics-drivers-desktop
+      - mir-demos
       - qtubuntu-desktop
       - ttf-ubuntu-font-family
       - qml-module-qt-labs-folderlistmodel
@@ -51,18 +51,13 @@ parts:
       - intltool
       - qtdeclarative5-dev
 # alternate clients to play with
-#  qmldemo:
-#    plugin: copy
-#    files:
-#      demo.qml: demo.qml
-#  samegame:
-#    plugin: copy
-#    files:
-#      samegame: samegame
+  qmldemo:
+    plugin: copy
+    files:
+      demo.qml: demo.qml
   environment:
     plugin: copy
     files:
-#      qtclockenv: bin/qtclockenv
       snappy-qt5.conf: etc/xdg/qtchooser/snappy-qt5.conf
   glue:
     plugin: copy

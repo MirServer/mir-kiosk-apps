@@ -1,6 +1,15 @@
 #!/bin/bash
 
-export ARCH='x86_64-linux-gnu'
+if [ "$SNAP_ARCH" == "amd64" ]; then
+  ARCH='x86_64-linux-gnu'
+elif [ "$SNAP_ARCH" == "armhf" ]; then
+  ARCH="arm-linux-gnueabihf"
+elif [ "$SNAP_ARCH" == "arm64" ]; then
+  ARCH="aarch64-linux-gnu"
+else
+  ARCH="$SNAP_ARCH-linux-gnu"
+fi
+
 export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH:$LD_LIBRARY_PATH
 # Mir config
 export MIR_SOCKET=/run/mir_socket
@@ -33,7 +42,8 @@ export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
 
 
 # Uncomment to choose whichever app you prefer
+#$SNAP/usr/bin/mir_demo_client_egltriangle -m /run/mir_socket
 #$SNAP/usr/bin/qmlscene $SNAP/demo.qml
-$SNAP/clocks
+$SNAP/usr/lib/$ARCH/qt5/examples/quick/demos/clocks/clocks
 
 wait
