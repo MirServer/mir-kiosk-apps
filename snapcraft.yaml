@@ -17,6 +17,8 @@ parts:
   examples:
     plugin: nil
     stage-packages:
+      - qtquick1-5-dev
+      - qtquick1-5-examples
       - qtdeclarative5-examples
       - qmlscene
       - qtdeclarative5-qtmir-plugin
