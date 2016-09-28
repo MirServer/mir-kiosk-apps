@@ -44,6 +44,6 @@ export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
 # Uncomment to choose whichever app you prefer
 #$SNAP/usr/bin/mir_demo_client_egltriangle -m /run/mir_socket
 #$SNAP/usr/bin/qmlscene $SNAP/demo.qml
-$SNAP/usr/lib/$ARCH/qt5/examples/quick/demos/clocks/clocks
+$SNAP/usr/lib/$ARCH/qt5/examples/quick/demos/photoviewer/photoviewer
 
 wait
