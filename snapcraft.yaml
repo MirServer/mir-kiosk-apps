@@ -63,6 +63,7 @@ parts:
       - build-essential
       - qtdeclarative5-dev
       - qtquick1-5-dev
+      - libqt5xmlpatterns5-dev
   qmldemo:
     plugin: copy
     files:
