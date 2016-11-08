@@ -6,8 +6,8 @@ confinement: strict
 grade: devel
 
 apps:
-  client-start:
-    command: bin/client-start
+  mir-client-daemon:
+    command: bin/mir-client-daemon
     daemon: simple
     plugs:
       - mir
@@ -67,7 +67,7 @@ parts:
     plugin: dump
     source: .
     organize:
-      client-start: bin/client-start
+      mir-client-daemon: bin/mir-client-daemon
       configure: meta/hooks/configure #FIXME: use actual hooks attribute when snapcraft supports it
 
   mir-libs-target:
