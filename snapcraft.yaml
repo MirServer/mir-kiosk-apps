@@ -30,6 +30,7 @@ parts:
     stage-packages:
       - qtdeclarative5-examples
       - qml-module-qtquick-window2 #qtdeclarative5-examples is missing this dep, which is used by various examples
+      - qml-module-qt-labs-folderlistmodel #Another missing dep, needed by photosurface
 
   mir-demos:
     plugin: nil
