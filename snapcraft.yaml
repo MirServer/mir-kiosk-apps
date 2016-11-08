@@ -56,7 +56,7 @@ parts:
     source: .
     snap: [demo.qml]
 
-  environment:
+  qtchooser-config:
     plugin: dump
     source: .
     organize:
@@ -73,3 +73,10 @@ parts:
     plugin: dump
     source: .
     snap: [mir-libs]
+
+  app-wrappers:
+    plugin: dump
+    source: .
+    snap: [bin]
+
+

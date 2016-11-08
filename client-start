@@ -1,5 +1,18 @@
 #!/bin/bash
 
+CONFIG_FILE=$SNAP_DATA/.config
+
+function run_the_app()
+{
+    # Use a default in case config file doesn't exist
+    local app=photoviewer
+    if [ -e ${config_file} ]; then
+        app=$(grep app ${CONFIG_FILE} | cut -d'=' -f2)
+    fi
+
+    $SNAP/bin/${app}
+}
+
 if [ "$SNAP_ARCH" == "amd64" ]; then
     ARCH="x86_64-linux-gnu"
 elif [ "$SNAP_ARCH" == "armhf" ]; then
@@ -41,9 +54,5 @@ export XDG_DATA_HOME=$SNAP/usr/share
 export FONTCONFIG_PATH=$SNAP/etc/fonts/config.d
 export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
 
-# Uncomment to choose whichever app you prefer
-#$SNAP/usr/bin/mir_demo_client_egltriangle -m /run/mir_socket
-#$SNAP/usr/bin/qmlscene $SNAP/demo.qml
-$SNAP/usr/lib/$ARCH/qt5/examples/quick/demos/photoviewer/photoviewer
-
-wait
+export ARCH
+run_the_app
