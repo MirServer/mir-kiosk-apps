@@ -20,40 +20,16 @@ plugs:
     default-provider: mir-libs:mir-libs
 
 parts:
-  qt-support:
+  qtubuntu:
     plugin: nil
     stage-packages:
-      - qtdeclarative5-dev
-      - qtdeclarative5-examples
-      - qmlscene
-      - qtdeclarative5-qtmir-plugin
       - qtubuntu-desktop
-      - ttf-ubuntu-font-family
-      - qml-module-qt-labs-folderlistmodel
-      - qml-module-qt-labs-settings
-      - qml-module-qt-websockets
-      - qml-module-qtfeedback
-      - qml-module-qtgraphicaleffects
-      - qml-module-qtlocation
-      - qml-module-qtmultimedia
-      - qml-module-qtorganizer
-      - qml-module-qtpositioning
-      - qml-module-qtqml-models2
-      - qml-module-qtqml-statemachine
-      - qml-module-qtquick-controls
-      - qml-module-qtquick-dialogs
-      - qml-module-qtquick-layouts
-      - qml-module-qtquick-localstorage
-      - qml-module-qtquick-particles2
-      - qml-module-qtquick-privatewidgets
-      - qml-module-qtquick-window2
-      - qml-module-qtquick-xmllistmodel
-      - qml-module-qtquick2
-      - qml-module-qtsensors
-      - qml-module-qtsysteminfo
-      - qml-module-qttest
-      - qml-module-qtwebkit
-      - intltool
+
+  qt-examples:
+    plugin: nil
+    stage-packages:
+      - qtdeclarative5-examples
+      - qml-module-qtquick-window2 #qtdeclarative5-examples is missing this dep, which is used by various examples
 
   mir-demos:
     plugin: nil
@@ -61,7 +37,6 @@ parts:
       - mir-demos
 
   photoviewer:
-    after: [qt-support]
     qt-version: qt5
     plugin: qmake
     source: https://github.com/qt/qtdeclarative.git
@@ -72,6 +47,9 @@ parts:
       - qtdeclarative5-dev
       - qtquick1-5-dev
       - libqt5xmlpatterns5-dev
+    stage-packages:
+      - qml-module-qtquick-controls
+      - qml-module-qtqml-models2
 
   qmldemo:
     plugin: dump
