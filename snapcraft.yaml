@@ -55,7 +55,9 @@ parts:
   qmldemo:
     plugin: dump
     source: .
-    snap: [demo.qml]
+    organize:
+      spinning-rect.qml: qml/spinning-rect.qml
+    stage-packages: [qmlscene]
 
   qtchooser-config:
     plugin: dump
