@@ -67,6 +67,7 @@ parts:
     source: .
     organize:
       client-start: bin/client-start
+      configure: meta/hooks/configure #FIXME: use actual hooks attribute when snapcraft supports it
 
   mir-libs-target:
     plugin: dump
