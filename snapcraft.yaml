@@ -64,15 +64,20 @@ parts:
       - qtdeclarative5-dev
       - qtquick1-5-dev
       - libqt5xmlpatterns5-dev
+
   qmldemo:
-    plugin: copy
-    files:
-      demo.qml: demo.qml
+    plugin: dump
+    source: .
+    snap: [demo.qml]
+
   environment:
-    plugin: copy
-    files:
+    plugin: dump
+    source: .
+    organize:
       snappy-qt5.conf: etc/xdg/qtchooser/snappy-qt5.conf
+
   glue:
-    plugin: copy
-    files:
+    plugin: dump
+    source: .
+    organize:
       client-start: bin/client-start
