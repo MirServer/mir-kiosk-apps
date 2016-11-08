@@ -14,15 +14,13 @@ apps:
       - mir
       - opengl
 parts:
-  examples:
+  qt-support:
     plugin: nil
     stage-packages:
       - qtdeclarative5-dev
       - qtdeclarative5-examples
       - qmlscene
       - qtdeclarative5-qtmir-plugin
-      - mir-graphics-drivers-desktop
-      - mir-demos
       - qtubuntu-desktop
       - ttf-ubuntu-font-family
       - qml-module-qt-labs-folderlistmodel
@@ -50,10 +48,15 @@ parts:
       - qml-module-qttest
       - qml-module-qtwebkit
       - intltool
-# alternate clients to play with
+
+  mir-demos:
+    plugin: nil
+    stage-packages:
+      - mir-graphics-drivers-desktop
+      - mir-demos
+
   photoviewer:
-    after:
-      - examples
+    after: [qt-support]
     qt-version: qt5
     plugin: qmake
     source: https://github.com/qt/qtdeclarative.git
