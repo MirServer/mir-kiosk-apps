@@ -69,6 +69,7 @@ parts:
     organize:
       mir-client-daemon: bin/mir-client-daemon
       qt-quick-demo-launcher: bin/qt-quick-demo-launcher
+      mir-demo-client-launcher: bin/mir-demo-client-launcher
       configure: meta/hooks/configure #FIXME: use actual hooks attribute when snapcraft supports it
 
   mir-libs-target:
