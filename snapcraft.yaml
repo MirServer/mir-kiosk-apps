@@ -1,7 +1,7 @@
 name: mir-client
 version: 0.24.1
 summary: Example app on Mir stack
-description: "This example can be used as a guide by other mir client snaps to render guis"
+description: This example can be used as a guide by other mir client snaps to render guis
 confinement: strict
 grade: devel
 
@@ -12,6 +12,13 @@ apps:
     plugs:
       - mir
       - opengl
+
+plugs:
+  mir-libs:
+    interface: content
+    target: mir-libs
+    default-provider: mir-libs:mir-libs
+
 parts:
   qt-support:
     plugin: nil
@@ -51,7 +58,6 @@ parts:
   mir-demos:
     plugin: nil
     stage-packages:
-      - mir-graphics-drivers-desktop
       - mir-demos
 
   photoviewer:
@@ -83,3 +89,8 @@ parts:
     source: .
     organize:
       client-start: bin/client-start
+
+  mir-libs-target:
+    plugin: dump
+    source: .
+    snap: [mir-libs]

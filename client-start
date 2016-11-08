@@ -1,19 +1,23 @@
 #!/bin/bash
 
 if [ "$SNAP_ARCH" == "amd64" ]; then
-	ARCH="x86_64-linux-gnu"
+    ARCH="x86_64-linux-gnu"
 elif [ "$SNAP_ARCH" == "armhf" ]; then
-	ARCH="arm-linux-gnueabihf"
+    ARCH="arm-linux-gnueabihf"
 elif [ "$SNAP_ARCH" == "arm64" ]; then
-	ARCH="aarch64-linux-gnu"
+    ARCH="aarch64-linux-gnu"
 else
-	ARCH="$SNAP_ARCH-linux-gnu"
+    ARCH="$SNAP_ARCH-linux-gnu"
 fi
 
 export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH:$LD_LIBRARY_PATH
 # Mir config
 export MIR_SOCKET=/run/mir_socket
-export MIR_CLIENT_PLATFORM_PATH=$SNAP/usr/lib/$ARCH/mir/client-platform
+export MIR_CLIENT_PLATFORM_PATH=$SNAP/mir-libs/$ARCH/mir/client-platform
+export LD_LIBRARY_PATH="$SNAP/mir-libs/$ARCH:$LD_LIBRARY_PATH"
+# Mesa Libs
+export LD_LIBRARY_PATH=$SNAP/mir-libs/$ARCH/mesa:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$SNAP/mir-libs/$ARCH/mesa-egl:$LD_LIBRARY_PATH
 
 # XKB config
 export XKB_CONFIG_ROOT=$SNAP/usr/share/X11/xkb
@@ -28,9 +32,6 @@ export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/pulseaudio:$LD_LIBRARY_PATH
 # Qt Modules
 export QT_PLUGIN_PATH=$SNAP/usr/lib/$ARCH/qt5/plugins
 export QML2_IMPORT_PATH=$SNAP/usr/lib/$ARCH/qt5/qml
-# Mesa Libs
-export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/mesa:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/mesa-egl:$LD_LIBRARY_PATH
 # XDG Config
 export XDG_CONFIG_DIRS=$SNAP/etc/xdg:$XDG_CONFIG_DIRS
 export XDG_CONFIG_DIRS=$SNAP/usr/xdg:$XDG_CONFIG_DIRS
@@ -39,7 +40,6 @@ export XDG_DATA_DIRS=$SNAP/usr/share:$XDG_DATA_DIRS
 export XDG_DATA_HOME=$SNAP/usr/share
 export FONTCONFIG_PATH=$SNAP/etc/fonts/config.d
 export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
-
 
 # Uncomment to choose whichever app you prefer
 #$SNAP/usr/bin/mir_demo_client_egltriangle -m /run/mir_socket
