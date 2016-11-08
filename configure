@@ -7,7 +7,12 @@ if [ -z "${app}" ]; then
     app=photoviewer
 fi
 
-# TODO: reject invalid app values
+# validate that the given value actually is a valid app name
+if [ ! -e "$SNAP/apps/${app}" ]; then
+    valid_apps=($SNAP/apps/*)
+    valid_apps=$( IFS=\|; echo "${valid_apps[*]#$SNAP/apps/}" )
+    echo "app can only be set to [${valid_apps}]"
+    exit 1
+fi
+
 echo "app=$app" > $SNAP_DATA/.config
-
-

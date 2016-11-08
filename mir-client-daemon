@@ -10,7 +10,7 @@ function run_the_app()
         app=$(grep app ${CONFIG_FILE} | cut -d'=' -f2)
     fi
 
-    $SNAP/bin/${app}
+    $SNAP/apps/${app}
 }
 
 if [ "$SNAP_ARCH" == "amd64" ]; then

@@ -68,6 +68,7 @@ parts:
     source: .
     organize:
       mir-client-daemon: bin/mir-client-daemon
+      qt-quick-demo-launcher: bin/qt-quick-demo-launcher
       configure: meta/hooks/configure #FIXME: use actual hooks attribute when snapcraft supports it
 
   mir-libs-target:
@@ -78,6 +79,6 @@ parts:
   app-wrappers:
     plugin: dump
     source: .
-    snap: [bin]
+    snap: [apps]
 
 
