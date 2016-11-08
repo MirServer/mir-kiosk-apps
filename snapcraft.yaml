@@ -4,7 +4,6 @@ summary: Example app on Mir stack
 description: "This example can be used as a guide by other mir client snaps to render guis"
 # as this is an example, type could be changed to oem
 confinement: strict
-type: app
 
 apps:
   client-start:
