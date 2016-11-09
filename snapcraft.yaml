@@ -46,7 +46,6 @@ parts:
     build-packages:
       - build-essential
       - qtdeclarative5-dev
-      - qtquick1-5-dev
       - libqt5xmlpatterns5-dev
     stage-packages:
       - qml-module-qtquick-controls
