@@ -1,4 +1,4 @@
 #!/bin/bash
 
 NAME=$(basename "$0")
-$SNAP/usr/bin/mir_demo_client_${NAME}
+exec $SNAP/usr/bin/mir_demo_client_${NAME}

@@ -83,4 +83,8 @@ parts:
     source: .
     snap: [apps]
 
+  inotify-tools:
+    plugin: nil
+    stage-packages: [inotify-tools]
+
 

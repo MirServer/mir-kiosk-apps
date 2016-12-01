@@ -2,7 +2,7 @@
 
 CONFIG_FILE=$SNAP_DATA/.config
 
-function run_the_app()
+function get_app_to_run()
 {
     # Use a default in case config file doesn't exist
     local app=photoviewer
@@ -10,7 +10,7 @@ function run_the_app()
         app=$(grep app ${CONFIG_FILE} | cut -d'=' -f2)
     fi
 
-    $SNAP/apps/${app}
+    echo ${app}
 }
 
 if [ "$SNAP_ARCH" == "amd64" ]; then
@@ -55,4 +55,40 @@ export FONTCONFIG_PATH=$SNAP/etc/fonts/config.d
 export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
 
 export ARCH
-run_the_app
+
+while true; do
+
+    app_to_run=$(get_app_to_run)
+
+    $SNAP/apps/${app_to_run} &
+    app_pid=$!
+
+    # Config file should exist but let's make sure
+    # otherwise, inotifywait will exit immediately and loop will
+    # keep restarting server
+    if [ -e "${CONFIG_FILE}" ]; then
+        $SNAP/usr/bin/inotifywait -e modify ${CONFIG_FILE} &
+        inotify_pid=$!
+    fi
+
+    # Wait for a notification or app death
+    wait -n
+
+    # app may have died, stop waiting for config notifications
+    if [ -n "${inotify_pid}" ]; then
+        kill ${inotify_pid} > /dev/null
+        wait ${inotify_pid}
+        unset inotify_pid
+    fi
+
+    echo "Shutting down ${app_to_run} (pid: ${app_pid})"
+    kill ${app_pid} > /dev/null
+    if [ $? -ne 0 ]; then
+        echo "${app_to_run} was already dead!"
+        exit 1
+    fi
+
+    # Ensure app processes has quit for sure
+    wait ${app_pid}
+    unset app_pid
+done

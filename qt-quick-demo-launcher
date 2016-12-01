@@ -1,4 +1,4 @@
 #!/bin/bash
 
 NAME=$(basename "$0")
-$SNAP/usr/lib/$ARCH/qt5/examples/quick/demos/${NAME}/${NAME}
+exec $SNAP/usr/lib/$ARCH/qt5/examples/quick/demos/${NAME}/${NAME}
