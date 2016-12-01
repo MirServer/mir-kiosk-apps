@@ -1,13 +1,13 @@
-name: mir-client
-version: 0.24.1
-summary: Example app on Mir stack
-description: This example can be used as a guide by other mir client snaps to render guis
+name: mir-kiosk-apps
+version: 0.1
+summary: Example apps to run with mir-kiosk
+description: Example apps to run with mir-kiosk
 confinement: strict
 grade: devel
 
 apps:
-  mir-client-daemon:
-    command: bin/mir-client-daemon
+  mir-kiosk-app-daemon:
+    command: bin/mir-kiosk-app-daemon
     daemon: simple
     plugs:
       - mir
@@ -68,7 +68,7 @@ parts:
     plugin: dump
     source: .
     organize:
-      mir-client-daemon: bin/mir-client-daemon
+      mir-kiosk-app-daemon: bin/mir-kiosk-app-daemon
       qt-quick-demo-launcher: bin/qt-quick-demo-launcher
       mir-demo-client-launcher: bin/mir-demo-client-launcher
       configure: meta/hooks/configure #FIXME: use actual hooks attribute when snapcraft supports it
