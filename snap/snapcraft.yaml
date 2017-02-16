@@ -68,20 +68,6 @@ parts:
     stage-packages:
       - mir-demos
 
-  photoviewer:
-    qt-version: qt5
-    plugin: qmake
-    source: https://github.com/qt/qtdeclarative.git
-    project-files:
-      - examples/quick/demos/photoviewer/photoviewer.pro
-    build-packages:
-      - build-essential
-      - qtdeclarative5-dev
-      - libqt5xmlpatterns5-dev
-    stage-packages:
-      - qml-module-qtquick-controls
-      - qml-module-qtqml-models2
-
   qmldemo:
     plugin: dump
     source: qmldemo
