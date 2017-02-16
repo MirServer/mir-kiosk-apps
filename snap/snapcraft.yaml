@@ -26,6 +26,13 @@ parts:
     plugin: nil
     stage-packages:
       - qtubuntu-desktop
+    build-attributes:
+     - no-system-libraries
+    prime:
+     - -usr/lib/*/libmir* #Use the libraries from mir-libs content plug
+     - usr/lib/*/lib*.so*
+     - usr/lib/*/qt5
+     - etc/xdg
 
   qt-examples:
     plugin: nil
