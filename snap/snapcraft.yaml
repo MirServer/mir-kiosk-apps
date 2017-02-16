@@ -67,13 +67,29 @@ parts:
     plugin: nil
     stage-packages:
       - mir-demos
+    build-attributes:
+     - no-system-libraries
+    organize:
+      usr/bin: bin
+    prime:
+     - bin/mir_demo_client_animated_cursor
+     - bin/mir_demo_client_cursors
+     - bin/mir_demo_client_eglplasma
+     - bin/mir_demo_client_egltriangle
+     - bin/mir_demo_client_fingerpaint
+     - bin/mir_demo_client_progressbar
 
   qmldemo:
     plugin: dump
     source: qmldemo
+    stage-packages: [qmlscene]
     organize:
       spinning-rect.qml: qml/spinning-rect.qml
-    stage-packages: [qmlscene]
+      usr/lib/*/qt5/bin/qmlscene: bin/qmlscene
+    prime:
+     - qml
+     - bin/qmlscene
+     - usr/lib/libQt*
 
   qtchooser-config:
     plugin: dump
@@ -87,9 +103,13 @@ parts:
 
   app-wrappers:
     plugin: dump
-    source: apps
+    source: app-wrappers
+    prime: [apps]
 
   inotify-tools:
     plugin: nil
     stage-packages: [inotify-tools]
+    prime:
+     - usr/bin/inotifywait
+     - usr/lib
 
