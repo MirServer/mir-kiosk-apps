@@ -54,38 +54,26 @@ parts:
 
   qmldemo:
     plugin: dump
-    source: .
+    source: qmldemo
     organize:
       spinning-rect.qml: qml/spinning-rect.qml
     stage-packages: [qmlscene]
 
   qtchooser-config:
     plugin: dump
-    source: .
+    source: qtconfig
     organize:
       snappy-qt5.conf: etc/xdg/qtchooser/snappy-qt5.conf
 
   glue:
     plugin: dump
-    source: .
-    organize:
-      mir-kiosk-app-daemon: bin/mir-kiosk-app-daemon
-      qt-quick-demo-launcher: bin/qt-quick-demo-launcher
-      mir-demo-client-launcher: bin/mir-demo-client-launcher
-      configure: meta/hooks/configure #FIXME: use actual hooks attribute when snapcraft supports it
-
-  mir-libs-target:
-    plugin: dump
-    source: .
-    snap: [mir-libs]
+    source: glue
 
   app-wrappers:
     plugin: dump
-    source: .
-    snap: [apps]
+    source: apps
 
   inotify-tools:
     plugin: nil
     stage-packages: [inotify-tools]
-
 
