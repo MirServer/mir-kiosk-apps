@@ -13,6 +13,7 @@ apps:
       - mir
       - opengl
       - network
+      - mir-libs
 
 plugs:
   mir-libs:
