@@ -6,7 +6,7 @@ function get_app_to_run()
 {
     # Use a default in case config file doesn't exist
     local app=photoviewer
-    if [ -e ${config_file} ]; then
+    if [ -e ${CONFIG_FILE} ]; then
         app=$(grep app ${CONFIG_FILE} | cut -d'=' -f2)
     fi
 
@@ -23,43 +23,56 @@ else
     ARCH="$SNAP_ARCH-linux-gnu"
 fi
 
-export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH:$LD_LIBRARY_PATH
-# Mir config
-export MIR_SOCKET=/run/mir_socket
-export MIR_CLIENT_PLATFORM_PATH=$SNAP/mir-libs/$ARCH/mir/client-platform
-export LD_LIBRARY_PATH="$SNAP/mir-libs/$ARCH:$LD_LIBRARY_PATH"
-# Mesa Libs
-export LD_LIBRARY_PATH=$SNAP/mir-libs/$ARCH/mesa:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$SNAP/mir-libs/$ARCH/mesa-egl:$LD_LIBRARY_PATH
+export MIR_LIBS=${SNAP}/mir-libs/usr/lib/$ARCH
+if [ ! -d ${MIR_LIBS} ] ; then
+    echo "####################################################################"
+    echo "ERROR: It appears ${SNAP_NAME}:mir-libs plug has not been connected."
+    echo "Please run:"
+    echo ""
+    echo "    snap install mir-libs --edge"
+    echo "    snap connect ${SNAP_NAME}:mir-libs mir-libs:mir-libs"
+    echo "    snap disable ${SNAP_NAME}"
+    echo "    sudo /usr/lib/snapd/snap-discard-ns ${SNAP_NAME}"
+    echo "    snap enable ${SNAP_NAME}"
+    echo ""
+    echo "###################################################################"
+    exit 1
+fi
 
 # XKB config
-export XKB_CONFIG_ROOT=$SNAP/usr/share/X11/xkb
+export XKB_CONFIG_ROOT=${SNAP}/usr/share/X11/xkb
 
 # Qt Platform to Mir
 export QT_QPA_PLATFORM=ubuntumirclient
 export QTCHOOSER_NO_GLOBAL_DIR=1
 export QT_SELECT=snappy-qt5
-# Qt Libs
-export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/qt5/libs:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$SNAP/usr/lib/$ARCH/pulseaudio:$LD_LIBRARY_PATH
-# Qt Modules
-export QT_PLUGIN_PATH=$SNAP/usr/lib/$ARCH/qt5/plugins
-export QML2_IMPORT_PATH=$SNAP/usr/lib/$ARCH/qt5/qml
-# XDG Config
-export XDG_CONFIG_DIRS=$SNAP/etc/xdg:$XDG_CONFIG_DIRS
-export XDG_CONFIG_DIRS=$SNAP/usr/xdg:$XDG_CONFIG_DIRS
-export XDG_DATA_DIRS=$SNAP/usr/share:$XDG_DATA_DIRS
-# needed for fontconfig
-export XDG_DATA_HOME=$SNAP/usr/share
-export FONTCONFIG_PATH=$SNAP/etc/fonts/config.d
-export FONTCONFIG_FILE=$SNAP/etc/fonts/fonts.conf
 
-export ARCH
+# Qt Modules
+export QT_PLUGIN_PATH=${SNAP}/usr/lib/$ARCH/qt5/plugins
+export QML2_IMPORT_PATH=${SNAP}/usr/lib/$ARCH/qt5/qml
+
+# XDG Config
+export XDG_CONFIG_DIRS=${SNAP}/etc/xdg:$XDG_CONFIG_DIRS
+export XDG_DATA_DIRS=${SNAP}/usr/share:$XDG_DATA_DIRS
+
+# Needed for fontconfig
+export XDG_DATA_HOME=${SNAP}/usr/share
+export FONTCONFIG_PATH=${SNAP}/etc/fonts/conf.d
+export FONTCONFIG_FILE=${SNAP}/etc/fonts/fonts.conf
+
+# Mesa libs
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MIR_LIBS}/mesa-egl
+
+# Mir config
+export MIR_SOCKET=/run/mir_socket
+export MIR_CLIENT_PLATFORM_PATH=${MIR_LIBS}/mir/client-platform
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MIR_LIBS}
 
 while true; do
 
     app_to_run=$(get_app_to_run)
 
+    echo "Running ${app_to_run}"
     $SNAP/apps/${app_to_run} &
     app_pid=$!
 
