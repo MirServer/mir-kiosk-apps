@@ -49,11 +49,11 @@ parts:
     prime:
      - qt-demos/*/content
      - qt-demos/*/*.qml
+     - -qt-demos/calqlatr # Doesn't work well
+     - -qt-demos/photosurface #Crashes
+     - -qt-demos/maroon
      - qt-demos/photoviewer/photoviewer
-     - qt-demos/calqlatr/calqlatr
      - qt-demos/clocks/clocks
-     - qt-demos/maroon/maroon
-     - qt-demos/photosurface/photosurface
      - qt-demos/rssnews/rssnews
      - qt-demos/samegame/samegame
      - qt-demos/stocqt/stocqt
