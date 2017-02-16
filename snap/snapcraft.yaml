@@ -41,6 +41,27 @@ parts:
       - qtdeclarative5-examples
       - qml-module-qtquick-window2 #qtdeclarative5-examples is missing this dep, which is used by various examples
       - qml-module-qt-labs-folderlistmodel #Another missing dep, needed by photosurface
+      - qml-module-qtquick-controls #Missing dep, needed by photoviewer
+    build-attributes:
+     - no-system-libraries
+    organize:
+      usr/lib/*/qt5/examples/quick/demos: qt-demos
+    prime:
+     - qt-demos/*/content
+     - qt-demos/*/*.qml
+     - qt-demos/photoviewer/photoviewer
+     - qt-demos/calqlatr/calqlatr
+     - qt-demos/clocks/clocks
+     - qt-demos/maroon/maroon
+     - qt-demos/photosurface/photosurface
+     - qt-demos/rssnews/rssnews
+     - qt-demos/samegame/samegame
+     - qt-demos/stocqt/stocqt
+     - qt-demos/tweetsearch/tweetsearch
+     - usr/lib
+     - usr/share/X11/xkb
+     - usr/share/fonts
+     - etc/fonts
 
   mir-demos:
     plugin: nil
