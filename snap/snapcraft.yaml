@@ -18,7 +18,7 @@ apps:
 plugs:
   mir-libs:
     interface: content
-    content: mir-libs
+    content: mir0
     target: mir-libs
     default-provider: mir-libs:mir-libs
 
