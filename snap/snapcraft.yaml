@@ -27,6 +27,7 @@ parts:
     plugin: nil
     stage-packages:
       - qtubuntu-desktop
+      - xdg-user-dirs
     build-attributes:
      - no-system-libraries
     prime:
@@ -52,7 +53,7 @@ parts:
      - -qt-demos/calqlatr # Doesn't work well
      - -qt-demos/photosurface #Crashes
      - -qt-demos/maroon
-     - qt-demos/photoviewer/photoviewer
+     - -qt-demos/photoviewer # Not built in Qt 5.5
      - qt-demos/clocks/clocks
      - qt-demos/rssnews/rssnews
      - qt-demos/samegame/samegame
