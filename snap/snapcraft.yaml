@@ -1,5 +1,5 @@
 name: mir-kiosk-apps
-version: 0.1
+version: 0.2
 summary: Example apps to run with mir-kiosk
 description: Example apps to run with mir-kiosk
 confinement: strict
