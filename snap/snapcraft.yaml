@@ -94,7 +94,7 @@ parts:
       - qml-module-qtquick-controls
       - qml-module-qtqml-models2
     organize:
-      usr/lib/x86_64-linux-gnu/qt5/examples/quick/demos/photoviewer: qt-demos/photoviewer
+      usr/lib/*/qt5/examples/quick/demos/photoviewer: qt-demos/photoviewer
 
   qmldemo:
     plugin: dump
