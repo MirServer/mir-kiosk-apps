@@ -53,7 +53,7 @@ parts:
      - -qt-demos/calqlatr # Doesn't work well
      - -qt-demos/photosurface #Crashes
      - -qt-demos/maroon
-     - -qt-demos/photoviewer # Not built in Qt 5.5
+     - qt-demos/photoviewer
      - qt-demos/clocks/clocks
      - qt-demos/rssnews/rssnews
      - qt-demos/samegame/samegame
@@ -79,22 +79,6 @@ parts:
      - bin/mir_demo_client_egltriangle
      - bin/mir_demo_client_fingerpaint
      - bin/mir_demo_client_progressbar
-
-  photoviewer:
-    qt-version: qt5
-    plugin: qmake
-    source: https://github.com/qt/qtdeclarative.git
-    project-files:
-      - examples/quick/demos/photoviewer/photoviewer.pro
-    build-packages:
-      - build-essential
-      - qtdeclarative5-dev
-      - libqt5xmlpatterns5-dev
-    stage-packages:
-      - qml-module-qtquick-controls
-      - qml-module-qtqml-models2
-    organize:
-      usr/lib/*/qt5/examples/quick/demos/photoviewer: qt-demos/photoviewer
 
   qmldemo:
     plugin: dump
