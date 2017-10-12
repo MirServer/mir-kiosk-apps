@@ -20,7 +20,7 @@ plugs:
     interface: content
     content: mir0
     target: mir-libs
-    default-provider: mir-libs:mir-libs
+    default-provider: mir-kiosk:mir-libs
 
 parts:
   qtubuntu:
@@ -48,6 +48,7 @@ parts:
     organize:
       usr/lib/*/qt5/examples/quick/demos: qt-demos
     prime:
+     - -usr/lib/*/libmir* #Use the libraries from mir-libs content plug
      - qt-demos/*/content
      - qt-demos/*/*.qml
      - -qt-demos/calqlatr # Doesn't work well
@@ -73,6 +74,7 @@ parts:
     organize:
       usr/bin: bin
     prime:
+     - -usr/lib/*/libmir* #Use the libraries from mir-libs content plug
      - bin/mir_demo_client_animated_cursor
      - bin/mir_demo_client_cursors
      - bin/mir_demo_client_eglplasma
@@ -91,6 +93,7 @@ parts:
      - qml
      - bin/qmlscene
      - usr/lib/libQt*
+     - -usr/lib/*/libmir* #Use the libraries from mir-libs content plug
 
   qtchooser-config:
     plugin: dump
