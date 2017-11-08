@@ -1,5 +1,5 @@
 name: mir-kiosk-apps
-version: 0.2.1
+version: 0.2.2
 summary: Example apps to run with mir-kiosk
 description: Example apps to run with mir-kiosk
 confinement: strict
@@ -16,11 +16,11 @@ apps:
       - mir-libs
 
 plugs:
-  mir-libs:
+  mir-libs-1604:
     interface: content
-    content: mir0
+    content: mir0-1604
     target: mir-libs
-    default-provider: mir-kiosk:mir-libs
+    default-provider: mir-kiosk:mir-libs-1604
 
 parts:
   qtubuntu:
