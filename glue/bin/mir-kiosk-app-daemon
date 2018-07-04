@@ -23,27 +23,12 @@ else
     ARCH="$SNAP_ARCH-linux-gnu"
 fi
 
-export MIR_LIBS=${SNAP}/mir-libs/$ARCH
-if [ ! -d ${MIR_LIBS} ] ; then
-    echo "####################################################################"
-    echo "ERROR: It appears ${SNAP_NAME}:mir-libs plug has not been connected."
-    echo "Please run:"
-    echo ""
-    echo "    snap install mir-libs --edge"
-    echo "    snap connect ${SNAP_NAME}:mir-libs mir-libs:mir-libs"
-    echo "    snap disable ${SNAP_NAME}"
-    echo "    sudo /usr/lib/snapd/snap-discard-ns ${SNAP_NAME}"
-    echo "    snap enable ${SNAP_NAME}"
-    echo ""
-    echo "###################################################################"
-    exit 1
-fi
-
 # XKB config
 export XKB_CONFIG_ROOT=${SNAP}/usr/share/X11/xkb
 
-# Qt Platform to Mir
-export QT_QPA_PLATFORM=ubuntumirclient
+# Qt Platform to Wayland
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORM_PLUGIN_PATH=$(find ${SNAP}/usr/lib/ -name qt5)/plugins/platforms/
 export QTCHOOSER_NO_GLOBAL_DIR=1
 export QT_SELECT=snappy-qt5
 
@@ -60,13 +45,8 @@ export XDG_DATA_HOME=${SNAP}/usr/share
 export FONTCONFIG_PATH=${SNAP}/etc/fonts/conf.d
 export FONTCONFIG_FILE=${SNAP}/etc/fonts/fonts.conf
 
-# Mesa libs
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MIR_LIBS}/mesa-egl
-
-# Mir config
-export MIR_SOCKET=/run/mir_socket
-export MIR_CLIENT_PLATFORM_PATH=${MIR_LIBS}/mir/client-platform
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MIR_LIBS}
+# GL Config
+export LIBGL_DRIVERS_PATH=$(find $SNAP/usr/lib/ -name dri)
 
 while true; do
 
