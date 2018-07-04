@@ -1,4 +1,0 @@
-#!/bin/bash
-
-NAME=$(basename "$0")
-exec ${SNAP}/bin/mir_demo_client_${NAME}

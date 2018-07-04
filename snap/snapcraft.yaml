@@ -1,40 +1,35 @@
 name: mir-kiosk-apps
-version: 0.2.2
+version: 0.3.0
 summary: Example apps to run with mir-kiosk
 description: Example apps to run with mir-kiosk
 confinement: strict
 grade: devel
+base: core18
 
 apps:
   mir-kiosk-app-daemon:
     command: bin/mir-kiosk-app-daemon
     daemon: simple
     plugs:
-      - mir
-      - opengl
       - network
-      - mir-libs-1604
+      - opengl
+      - wayland
+    environment:
+      XDG_RUNTIME_DIR: $SNAP_DATA/wayland
+      __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
 
 plugs:
-  mir-libs-1604:
+  wayland-socket-dir:
+    content: wayland-socket-dir
     interface: content
-    content: mir0-1604
-    target: mir-libs
-    default-provider: mir-kiosk:mir-libs-1604
+    target: $SNAP_DATA/wayland
+    default-provider: mir-kiosk:wayland-socket-dir
 
 parts:
-  qtubuntu:
+  qtwayland:
     plugin: nil
     stage-packages:
-      - qtubuntu-desktop
-      - xdg-user-dirs
-    build-attributes:
-     - no-system-libraries
-    prime:
-     - -usr/lib/*/libmir* #Use the libraries from mir-libs content plug
-     - usr/lib/*/lib*.so*
-     - usr/lib/*/qt5
-     - etc/xdg
+      - qtwayland5
 
   qt-examples:
     plugin: nil
@@ -48,7 +43,6 @@ parts:
     organize:
       usr/lib/*/qt5/examples/quick/demos: qt-demos
     prime:
-     - -usr/lib/*/libmir* #Use the libraries from mir-libs content plug
      - qt-demos/*/content
      - qt-demos/*/*.qml
      - -qt-demos/calqlatr # Doesn't work well
@@ -65,23 +59,6 @@ parts:
      - usr/share/fonts
      - etc/fonts
 
-  mir-demos:
-    plugin: nil
-    stage-packages:
-      - mir-demos
-    build-attributes:
-     - no-system-libraries
-    organize:
-      usr/bin: bin
-    prime:
-     - -usr/lib/*/libmir* #Use the libraries from mir-libs content plug
-     - bin/mir_demo_client_animated_cursor
-     - bin/mir_demo_client_cursors
-     - bin/mir_demo_client_eglplasma
-     - bin/mir_demo_client_egltriangle
-     - bin/mir_demo_client_fingerpaint
-     - bin/mir_demo_client_progressbar
-
   qmldemo:
     plugin: dump
     source: qmldemo
@@ -93,7 +70,6 @@ parts:
      - qml
      - bin/qmlscene
      - usr/lib/libQt*
-     - -usr/lib/*/libmir* #Use the libraries from mir-libs content plug
 
   qtchooser-config:
     plugin: dump
@@ -116,4 +92,3 @@ parts:
     prime:
      - usr/bin/inotifywait
      - usr/lib
-

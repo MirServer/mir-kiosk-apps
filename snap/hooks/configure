@@ -1,6 +1,9 @@
 #!/bin/bash
+echo "*** running: " $0
 
 app=$(snapctl get app)
+echo "*** app[in]: ${app}"
+
 if [ -z "${app}" ]; then
     # This could be the first time the snap is configured (at install time)
     # let's choose a default instead of exiting
@@ -15,4 +18,5 @@ if [ ! -e "$SNAP/apps/${app}" ]; then
     exit 1
 fi
 
+echo "*** app[out]: ${app}"
 echo "app=$app" > $SNAP_DATA/config_options
