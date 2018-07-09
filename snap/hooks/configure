@@ -1,9 +1,15 @@
 #!/bin/bash
-echo "*** running: " $0
+
+# Detect failure mode with early core18
+if ! which snapctl > /dev/null; then
+    echo "WARNING: 'snapctl' is missing, configuration will fail."
+    echo "    This should be fixed in core18 soon, set app to one of:"
+    ls -1 $SNAP/apps/ | sed "s/^/        /"
+    echo "    by editing /var/snap/mir-kiosk-apps/current/config_options"
+    exit 1
+fi
 
 app=$(snapctl get app)
-echo "*** app[in]: ${app}"
-
 if [ -z "${app}" ]; then
     # This could be the first time the snap is configured (at install time)
     # let's choose a default instead of exiting
@@ -18,5 +24,4 @@ if [ ! -e "$SNAP/apps/${app}" ]; then
     exit 1
 fi
 
-echo "*** app[out]: ${app}"
 echo "app=$app" > $SNAP_DATA/config_options
