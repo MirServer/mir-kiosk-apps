@@ -65,7 +65,7 @@ parts:
     stage-packages: [qmlscene]
     organize:
       spinning-rect.qml: qml/spinning-rect.qml
-      usr/lib/*/qt5/bin/qmlscene: bin/qmlscene
+      usr/lib/qt5/bin/qmlscene: bin/qmlscene
     prime:
      - qml
      - bin/qmlscene
