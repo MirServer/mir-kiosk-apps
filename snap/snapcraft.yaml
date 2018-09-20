@@ -15,15 +15,8 @@ apps:
       - opengl
       - wayland
     environment:
-      XDG_RUNTIME_DIR: $SNAP_DATA/wayland
+      XDG_RUNTIME_DIR: /run/user/0
       __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
-
-plugs:
-  wayland-socket-dir:
-    content: wayland-socket-dir
-    interface: content
-    target: $SNAP_DATA/wayland
-    default-provider: mir-kiosk:wayland-socket-dir
 
 parts:
   qtwayland:
