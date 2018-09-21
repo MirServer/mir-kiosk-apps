@@ -13,41 +13,6 @@ function get_app_to_run()
     echo ${app}
 }
 
-if [ "$SNAP_ARCH" == "amd64" ]; then
-    ARCH="x86_64-linux-gnu"
-elif [ "$SNAP_ARCH" == "armhf" ]; then
-    ARCH="arm-linux-gnueabihf"
-elif [ "$SNAP_ARCH" == "arm64" ]; then
-    ARCH="aarch64-linux-gnu"
-else
-    ARCH="$SNAP_ARCH-linux-gnu"
-fi
-
-# XKB config
-export XKB_CONFIG_ROOT=${SNAP}/usr/share/X11/xkb
-
-# Qt Platform to Wayland
-export QT_QPA_PLATFORM=wayland
-export QT_QPA_PLATFORM_PLUGIN_PATH=$(find ${SNAP}/usr/lib/ -name qt5)/plugins/platforms/
-export QTCHOOSER_NO_GLOBAL_DIR=1
-export QT_SELECT=snappy-qt5
-
-# Qt Modules
-export QT_PLUGIN_PATH=${SNAP}/usr/lib/$ARCH/qt5/plugins
-export QML2_IMPORT_PATH=${SNAP}/usr/lib/$ARCH/qt5/qml
-
-# XDG Config
-export XDG_CONFIG_DIRS=${SNAP}/etc/xdg:$XDG_CONFIG_DIRS
-export XDG_DATA_DIRS=${SNAP}/usr/share:$XDG_DATA_DIRS
-
-# Needed for fontconfig
-export XDG_DATA_HOME=${SNAP}/usr/share
-export FONTCONFIG_PATH=${SNAP}/etc/fonts/conf.d
-export FONTCONFIG_FILE=${SNAP}/etc/fonts/fonts.conf
-
-# GL Config
-export LIBGL_DRIVERS_PATH=$(find $SNAP/usr/lib/ -name dri)
-
 while true; do
 
     app_to_run=$(get_app_to_run)
