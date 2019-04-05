@@ -14,28 +14,29 @@ apps:
       - network
       - opengl
       - wayland
-    environment:
-      XDG_RUNTIME_DIR: /run/user/0
-      __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
-      # XKB config
-      XKB_CONFIG_ROOT: ${SNAP}/usr/share/X11/xkb
-      # Qt Platform to Wayland
-      QT_QPA_PLATFORM: wayland
-      QT_QPA_PLATFORM_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins/platforms/
-      QTCHOOSER_NO_GLOBAL_DIR: 1
-      QT_SELECT: snappy-qt5
-      # Qt Modules
-      QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins
-      QML2_IMPORT_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/qml
-      # XDG Config
-      XDG_CONFIG_DIRS: ${SNAP}/etc/xdg:$XDG_CONFIG_DIRS
-      XDG_DATA_DIRS: ${SNAP}/usr/share:$XDG_DATA_DIRS
-      # Needed for fontconfig
-      XDG_DATA_HOME: ${SNAP}/usr/share
-      FONTCONFIG_PATH: ${SNAP}/etc/fonts/conf.d
-      FONTCONFIG_FILE: ${SNAP}/etc/fonts/fonts.conf
-      # GL Config
-      LIBGL_DRIVERS_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/dri
+
+environment:
+  XDG_RUNTIME_DIR: /run/user/0
+  __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
+  # XKB config
+  XKB_CONFIG_ROOT: ${SNAP}/usr/share/X11/xkb
+  # Qt Platform to Wayland
+  QT_QPA_PLATFORM: wayland
+  QT_QPA_PLATFORM_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins/platforms/
+  QTCHOOSER_NO_GLOBAL_DIR: 1
+  QT_SELECT: snappy-qt5
+  # Qt Modules
+  QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins
+  QML2_IMPORT_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/qml
+  # XDG Config
+  XDG_CONFIG_DIRS: ${SNAP}/etc/xdg:$XDG_CONFIG_DIRS
+  XDG_DATA_DIRS: ${SNAP}/usr/share:$XDG_DATA_DIRS
+  # Needed for fontconfig
+  XDG_DATA_HOME: ${SNAP}/usr/share
+  FONTCONFIG_PATH: ${SNAP}/etc/fonts/conf.d
+  FONTCONFIG_FILE: ${SNAP}/etc/fonts/fonts.conf
+  # GL Config
+  LIBGL_DRIVERS_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/dri
 
 parts:
   qtwayland:
@@ -50,26 +51,8 @@ parts:
       - qml-module-qtquick-window2 #qtdeclarative5-examples is missing this dep, which is used by various examples
       - qml-module-qt-labs-folderlistmodel #Another missing dep, needed by photosurface
       - qml-module-qtquick-controls #Missing dep, needed by photoviewer
-    build-attributes:
-     - no-system-libraries
     organize:
       usr/lib/*/qt5/examples/quick/demos: qt-demos
-    prime:
-     - qt-demos/*/content
-     - qt-demos/*/*.qml
-     - -qt-demos/calqlatr # Doesn't work well
-     - -qt-demos/photosurface #Crashes
-     - -qt-demos/maroon
-     - qt-demos/photoviewer
-     - qt-demos/clocks/clocks
-     - qt-demos/rssnews/rssnews
-     - qt-demos/samegame/samegame
-     - qt-demos/stocqt/stocqt
-     - qt-demos/tweetsearch/tweetsearch
-     - usr/lib
-     - usr/share/X11/xkb
-     - usr/share/fonts
-     - etc/fonts
 
   qmldemo:
     plugin: dump
