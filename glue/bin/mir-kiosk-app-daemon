@@ -5,7 +5,7 @@ CONFIG_FILE=$SNAP_DATA/config_options
 function get_app_to_run()
 {
     # Use a default in case config file doesn't exist
-    local app=photoviewer
+    local app=rssnews
     if [ -e ${CONFIG_FILE} ]; then
         app=$(grep app ${CONFIG_FILE} | cut -d'=' -f2)
     fi
