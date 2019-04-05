@@ -1,11 +1,6 @@
 #!/bin/bash
 
 app=$(snapctl get app)
-if [ -z "${app}" ]; then
-    # This could be the first time the snap is configured (at install time)
-    # let's choose a default instead of exiting
-    app=rssnews
-fi
 
 # validate that the given value actually is a valid app name
 if [ ! -e "$SNAP/apps/${app}" ]; then
