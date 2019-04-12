@@ -1,0 +1,8 @@
+#!/bin/bash
+set -x
+
+app=$(snapctl get app)
+
+if [ -z "${app}" ] || [ ! -e "$SNAP/apps/${app}" ]; then
+    snapctl set app=rssnews
+fi
