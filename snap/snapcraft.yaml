@@ -7,16 +7,19 @@ grade: devel
 base: core18
 
 apps:
-  mir-kiosk-app-daemon:
+  daemon:
     command: bin/mir-kiosk-app-daemon
     daemon: simple
-    plugs:
-      - network
-      - opengl
-      - wayland
+    restart-condition: on-failure
+
+  mir-kiosk-apps:
+    command: bin/mir-kiosk-apps
+plugs:
+  network:
+  opengl:
+  wayland:
 
 environment:
-  XDG_RUNTIME_DIR: /run/user/0
   __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
   # XKB config
   XKB_CONFIG_ROOT: ${SNAP}/usr/share/X11/xkb
