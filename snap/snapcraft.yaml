@@ -14,6 +14,7 @@ apps:
 
   mir-kiosk-apps:
     command: bin/mir-kiosk-apps
+
 plugs:
   network:
   opengl:
