@@ -1,4 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 set -x
 
 snapctl set app=rssnews
+
+if [ "$(snapctl get daemon)" = "" ]
+then
+  if grep -q snap_core= /proc/cmdline
+  then snapctl set daemon=true
+  else snapctl set daemon=false
+  fi
+fi

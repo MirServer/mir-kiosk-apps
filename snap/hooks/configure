@@ -10,4 +10,4 @@ if [ ! -e "$SNAP/apps/${app}" ]; then
     exit 1
 fi
 
-echo "app=$app" > $SNAP_DATA/config_options
+snapctl restart $SNAP_NAME
