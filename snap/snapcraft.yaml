@@ -76,10 +76,6 @@ parts:
     organize:
       snappy-qt5.conf: etc/xdg/qtchooser/snappy-qt5.conf
 
-  glue:
-    plugin: dump
-    source: glue
-
   mir-kiosk-snap-launch:
     plugin: dump
     source: https://github.com/MirServer/mir-kiosk-snap-launch.git
@@ -91,7 +87,6 @@ parts:
   app-wrappers:
     plugin: dump
     source: app-wrappers
-    prime: [apps]
 
   inotify-tools:
     plugin: nil
