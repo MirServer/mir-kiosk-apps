@@ -8,12 +8,12 @@ base: core18
 
 apps:
   daemon:
-    command: bin/mir-kiosk-app-daemon
+    command: run-daemon wayland-launch "$SNAP/apps/$(snapctl get app)"
     daemon: simple
     restart-condition: on-failure
 
   mir-kiosk-apps:
-    command: bin/mir-kiosk-apps
+    command: wayland-launch "$SNAP/apps/$(snapctl get app)"
 
 plugs:
   network:
@@ -79,6 +79,14 @@ parts:
   glue:
     plugin: dump
     source: glue
+
+  mir-kiosk-snap-launch:
+    plugin: dump
+    source: https://github.com/MirServer/mir-kiosk-snap-launch.git
+    override-build: |
+      echo "snapctl set app=rssnews" >> $SNAPCRAFT_PART_BUILD/meta/hooks/install
+      echo "[ -e \"\$SNAP/apps/\$(snapctl get app)\" ] || snapctl set app=rssnews" >> $SNAPCRAFT_PART_BUILD/meta/hooks/post-refresh
+      $SNAPCRAFT_PART_BUILD/build-with-plugs.sh network opengl wayland
 
   app-wrappers:
     plugin: dump

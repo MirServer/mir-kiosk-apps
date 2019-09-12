@@ -6,7 +6,7 @@ app=$(snapctl get app)
 if [ ! -e "$SNAP/apps/${app}" ]; then
     valid_apps=($SNAP/apps/*)
     valid_apps=$( IFS=\|; echo "${valid_apps[*]#$SNAP/apps/}" )
-    echo "app can only be set to [${valid_apps}]"
+    echo "app (${app}) can only be set to [${valid_apps}]"
     exit 1
 fi
 
