@@ -10,4 +10,4 @@ if [ ! -e "$SNAP/apps/${app}" ]; then
     exit 1
 fi
 
-snapctl restart $SNAP_NAME
+snapctl restart $SNAP_INSTANCE_NAME
