@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-
-while [ "$(snapctl get daemon)" = "true" ]
-do "$(dirname "$0")/mir-kiosk-apps"
-done
