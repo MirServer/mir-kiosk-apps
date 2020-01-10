@@ -20,10 +20,21 @@ plugs:
   opengl:
   wayland:
 
+layout:
+  /etc/glvnd:
+    bind: $SNAP/etc/glvnd
+  /etc/fonts:
+    bind: $SNAP/etc/fonts
+  /etc/xdg:
+    bind: $SNAP/etc/xdg
+  /usr/share/X11/xkb:
+    bind: $SNAP/usr/share/X11/xkb
+  /usr/share/fonts:
+    bind: $SNAP/usr/share/fonts
+  /usr/share/glvnd:
+    bind: $SNAP/usr/share/glvnd
+
 environment:
-  __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
-  # XKB config
-  XKB_CONFIG_ROOT: ${SNAP}/usr/share/X11/xkb
   # Qt Platform to Wayland
   QT_QPA_PLATFORM: wayland
   QT_QPA_PLATFORM_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins/platforms/
@@ -32,13 +43,6 @@ environment:
   # Qt Modules
   QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins
   QML2_IMPORT_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/qml
-  # XDG Config
-  XDG_CONFIG_DIRS: ${SNAP}/etc/xdg:$XDG_CONFIG_DIRS
-  XDG_DATA_DIRS: ${SNAP}/usr/share:$XDG_DATA_DIRS
-  # Needed for fontconfig
-  XDG_DATA_HOME: ${SNAP}/usr/share
-  FONTCONFIG_PATH: ${SNAP}/etc/fonts/conf.d
-  FONTCONFIG_FILE: ${SNAP}/etc/fonts/fonts.conf
   # GL Config
   LIBGL_DRIVERS_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/dri
 
