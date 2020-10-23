@@ -8,12 +8,17 @@ base: core18
 
 apps:
   daemon:
-    command: run-daemon wayland-launch "$SNAP/apps/$(snapctl get app)"
+    command-chain:
+      - bin/run-daemon
+      - bin/wayland-launch
+    command: bin/app-launcher
     daemon: simple
     restart-condition: always
 
   mir-kiosk-apps:
-    command: wayland-launch "$SNAP/apps/$(snapctl get app)"
+    command-chain:
+      - bin/wayland-launch
+    command: bin/app-launcher
 
 plugs:
   network:
@@ -58,7 +63,7 @@ parts:
       - qml-module-qt-labs-folderlistmodel #Another missing dep, needed by photosurface
       - qml-module-qtquick-controls #Missing dep, needed by photoviewer
     organize:
-      usr/lib/*/qt5/examples/quick/demos: qt-demos
+      usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/examples/quick/demos: qt-demos
 
   qmldemo:
     plugin: dump
@@ -85,6 +90,8 @@ parts:
       echo "snapctl set app=rssnews" >> $SNAPCRAFT_PART_BUILD/meta/hooks/install
       echo "[ -e \"\$SNAP/apps/\$(snapctl get app)\" ] || snapctl set app=rssnews" >> $SNAPCRAFT_PART_BUILD/meta/hooks/post-refresh
       $SNAPCRAFT_PART_BUILD/build-with-plugs.sh network opengl wayland
+    stage-packages:
+      - inotify-tools
 
   app-wrappers:
     plugin: dump
